@@ -11,30 +11,30 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      country : [],
-      price: [],
-      factor : 0
+      data : []
     }
   }
 
   componentDidMount() {
     axios.get(endpoint)
     .then( res => {
-    //   let obj = res.data.rates
-    //   let arr = Object.keys(obj)
-    //   let arrObj = arr.map( key =>  {
-    //     return {[key] : obj[key]}
-    // })
-    // this.setState({
-    //   prices : arrObj
-    // })
     let countries = Object.keys(res.data.rates)
     let prices = Object.values(res.data.rates)
     let btcFactor = (1 / res.data.rates.BTC) / 100000000
     let newPrices = prices.map(i =>  i * btcFactor)
+    let newList = []
+    for (let i = 0 ; i<countries.length; i++) {
+      if (countries[i] !== 'BTC') {
+        let tempObj = { 
+          id: i,
+          country: `${countries[i]}`,
+          price: newPrices[i].toFixed(5)
+         }
+         newList.push(tempObj)
+      }
+    }
     this.setState({
-      country : countries,
-      price : newPrices
+      data : newList
     })
   })   
     
@@ -47,7 +47,7 @@ class App extends Component {
       <>
         <Header />
         <SearchBar />
-        <PriceList prices={this.state} />
+        <PriceList data={this.state.data} />
       </>
     );
   }

@@ -2,14 +2,20 @@ import React from 'react'
 
 const PriceList = (props) => {
   return (
-    <div className="dataContainer">
-        <div className="countries">
-            {props.prices.country.map(i => <h3>{i}:</h3>)}   
-        </div>
-        <div className="prices">
-            {props.prices.price.map(i => <h3>{i}</h3>)}      
-        </div>
-    </div>
+      <>
+        {props.data.map(item => {
+            return (
+                <div className='dataCountainer'>
+                    <div className="countries">
+                        <h1>{item.country}</h1>)
+                    </div>
+                    <div className="price">
+                        <h1>{item.price}</h1>
+                    </div>
+                </div>
+            )
+            }
+      </>
   )
 }
 
