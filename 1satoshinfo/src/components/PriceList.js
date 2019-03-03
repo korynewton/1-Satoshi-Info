@@ -1,9 +1,14 @@
 import React from 'react'
 
-const PriceList = () => {
+const PriceList = (props) => {
   return (
-    <div>
-      <h1>Here is my price list</h1>
+    <div className="dataContainer">
+        <div className="countries">
+            {props.prices.country.map(i => <h3>{i}:</h3>)}   
+        </div>
+        <div className="prices">
+            {props.prices.price.map(i => <h3>{i}</h3>)}      
+        </div>
     </div>
   )
 }

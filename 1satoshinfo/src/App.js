@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 
-import './App.css';
-
 import {endpoint} from './config'
 import Header from './components/Header';
 import SearchBar from './components/SearchBar';
@@ -13,21 +11,40 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      priceData : []
+      country : [],
+      price: []
     }
   }
 
   componentDidMount() {
     axios.get(endpoint)
-    .then((res) => console.log(res.data))
+    .then( res => {
+    //   let obj = res.data.rates
+    //   let arr = Object.keys(obj)
+    //   let arrObj = arr.map( key =>  {
+    //     return {[key] : obj[key]}
+    // })
+    // this.setState({
+    //   prices : arrObj
+    // })
+    let countries = Object.keys(res.data.rates)
+    let prices = Object.values(res.data.rates)
+    this.setState({
+      country : countries,
+      price : prices
+    })
+  })   
+    
     .catch((err) => console.log(err))
   }
+
   render() {
+    // console.log(this.state)
     return (
       <>
         <Header />
         <SearchBar />
-        <PriceList />
+        <PriceList prices={this.state} />
       </>
     );
   }
