@@ -12,7 +12,8 @@ class App extends Component {
     super(props)
     this.state = {
       country : [],
-      price: []
+      price: [],
+      factor : 0
     }
   }
 
@@ -29,9 +30,11 @@ class App extends Component {
     // })
     let countries = Object.keys(res.data.rates)
     let prices = Object.values(res.data.rates)
+    let btcFactor = (1 / res.data.rates.BTC) / 100000000
+    let newPrices = prices.map(i =>  i * btcFactor)
     this.setState({
       country : countries,
-      price : prices
+      price : newPrices
     })
   })   
     
