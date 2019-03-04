@@ -3,6 +3,8 @@ import axios from 'axios'
 
 import {endpoint} from '../config'
 
+import Price from './Price'
+
 
 export default class PriceList extends Component {
     constructor(props) {
@@ -41,9 +43,13 @@ export default class PriceList extends Component {
   render() {
       console.log(this.state)
     return (
-      <div>
-          <h1>Price list</h1>        
-      </div>
+        <>
+            <h1> 1 satoshi is worth:</h1>
+            <div className='priceContainer'>
+                
+            {this.state.data.map( i => <Price key={i.id} obj={i} />)}      
+            </div>
+        </>
     )
   }
 }

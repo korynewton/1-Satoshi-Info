@@ -1,18 +1,17 @@
-.dataContainer {
-  display: flex;
-  flex-flow: row nowrap;
-  border: 1px solid red;
-  justify-content: center;
-
-}
-.countries {
-  display: flex;
-  flex-flow: column nowrap;
-  border: 1px solid blue;
-}
-
-.prices {
-  display: flex;
-  flex-flow: column nowrap;
+.priceContainer {
   border: 1px solid black;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.individualPrice {
+  border: 1px solid black;
+  text-align: center;
+  margin: 10px;
+  border-radius: 10px;
+  width:  100px;
+  height: 60px;
+  max-width: 100px;
 }
