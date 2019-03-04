@@ -1,22 +1,49 @@
-import React from 'react'
+import React, { Component } from 'react'
+import axios from 'axios'
 
-const PriceList = (props) => {
-  return (
-      <>
-        {props.data.map(item => {
-            return (
-                <div className='dataCountainer'>
-                    <div className="countries">
-                        <h1>{item.country}</h1>)
-                    </div>
-                    <div className="price">
-                        <h1>{item.price}</h1>
-                    </div>
-                </div>
-            )
-            }
-      </>
-  )
+import {endpoint} from '../config'
+
+
+export default class PriceList extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            data : []
+        }
+    }
+
+    componentDidMount() {
+        axios.get(endpoint)
+        .then( res => {
+        let countries = Object.keys(res.data.rates)
+        let prices = Object.values(res.data.rates)
+        let btcFactor = (1 / res.data.rates.BTC) / 100000000
+        let newPrices = prices.map(i =>  i * btcFactor)
+        let newList = []
+        for (let i = 0 ; i<countries.length; i++) {
+          if (countries[i] !== 'BTC') {
+            let tempObj = { 
+              id: i,
+              country: `${countries[i]}`,
+              price: newPrices[i].toFixed(5)
+             }
+             newList.push(tempObj)
+          }
+        }
+        this.setState({
+          data : newList
+        })
+      })   
+        
+        .catch((err) => console.log(err))
+      }
+
+  render() {
+      console.log(this.state)
+    return (
+      <div>
+          <h1>Price list</h1>        
+      </div>
+    )
+  }
 }
-
-export default PriceList
