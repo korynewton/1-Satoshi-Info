@@ -5,6 +5,7 @@ import SearchBar from './components/SearchBar';
 import PriceList from './components/PriceList';
 
 
+
 class App extends Component {
   constructor(props) {
     super(props)
@@ -16,7 +17,7 @@ class App extends Component {
     return (
       <>
         <Header />
-        <SearchBar />
+        <SearchBar /> 
         <PriceList />
       </>
     );

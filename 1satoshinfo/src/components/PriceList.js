@@ -44,9 +44,8 @@ export default class PriceList extends Component {
       console.log(this.state)
     return (
         <>
-            <h1> 1 satoshi is worth:</h1>
-            <div className='priceContainer'>
-                
+            <h1> 1 satoshi is worth:</h1>          
+            <div className='priceContainer'>                
             {this.state.data.map( i => <Price key={i.id} obj={i} />)}      
             </div>
         </>
